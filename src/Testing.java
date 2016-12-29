@@ -80,7 +80,7 @@ public class Testing{
  }
  
  @Test
- public void invaligEmailLoginTest()
+ public void invalidEmail()
  {
 	 WebElement login = driver.findElementById("com.perm.kate:id/username");
 	 WebElement passwod = driver.findElementById("com.perm.kate:id/password");
@@ -96,7 +96,7 @@ public class Testing{
  }
  
  @Test
- public void InvalidPhoneNumberLoginTest()
+ public void InvalidPhone()
  {
 	 WebElement login = driver.findElementById("com.perm.kate:id/username");
 	 WebElement passwod = driver.findElementById("com.perm.kate:id/password");
@@ -112,7 +112,7 @@ public class Testing{
  }
  
  @Test
- public void addWidgetTest()
+ public void addWidget()
  {
 	 driver.pressKeyCode(AndroidKeyCode.HOME);
 	 try {
@@ -143,5 +143,48 @@ public class Testing{
 	Assert.assertEquals("Kate Mobile", kateIcon.getText());	
 	
 	
+ }
+ 
+ @Test
+ public void settingsOpen()
+ {
+ 
+	 WebElement login = driver.findElementById("com.perm.kate:id/username");
+	 WebElement passwod = driver.findElementById("com.perm.kate:id/password");
+	 WebElement loginButton = driver.findElementById("com.perm.kate:id/login_btn");
+	 WebDriverWait errorViewWait = new WebDriverWait(driver, 30);
+	 login.clear();
+	 login.sendKeys("");// here should be valid your login
+	 passwod.clear();
+	 passwod.sendKeys(""); // here should be valid your password
+	 loginButton.click();
+	 
+	 try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	 
+	 WebElement menuSwitcher = driver.findElementById("com.perm.kate:id/fl_button_menu");
+	 menuSwitcher.click();
+	 
+	 try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	 TouchAction action = new TouchAction(driver);
+	 action.press(730,1900).release().perform();
+	 
+	 try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+ }
+ 
+ @After
+ public void tearDown() throws Exception {
+	 driver.quit();
  }
 }
